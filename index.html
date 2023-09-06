@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Valorant Skins</title>
+  <style>
+    /* Dark theme styling */
+    body {
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://cdn.discordapp.com/attachments/1146303772730073191/1147497559280066653/5963afe2124eb683a3e4bffd0352c777.gif'); /* Replace with the URL of your background image */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #d1d1d1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .skin-card {
+      border: 1px solid #333;
+      padding: 10px;
+      margin: 10px;
+      background-color: rgba(14, 14, 16, 0.8); /* Semi-transparent background color */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .skin-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      font-family: "Valorant Font", sans-serif;
+      font-size: 36px;
+      color: #ffffff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    img {
+      display: block;
+      margin: 10px auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Credit styling */
+    .credit {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    /* Search bar styling */
+    .search-bar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      background-color: #DF0500;
+      border-radius: 20px;
+      padding: 5px;
+    }
+
+    .search-input {
+      border: none;
+      background: none;
+      padding: 5px;
+      margin-right: 10px;
+      color: #fff;
+      font-size: 14px;
+      width: 150px;
+    }
+
+    .search-input:focus {
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: #fff;
+    }
+
+    .search-button {
+      background-color: #d1d1d1;
+      border: none;
+      border-radius: 20px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .search-button:hover {
+      background-color: #bbb;
+    }
+
+    /* Overlay styling */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Transparent background */
+      z-index: 1;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .overlay-content {
+      background-color: #1e1e1e; /* Dark theme background color */
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      color: #fff; /* Text color */
+    }
+
+    .overlay-content button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Discord logo styling */
+    .discord-link {
+      position: fixed;
+      top: 10px;
+      left: 20px;
+      z-index: 2;
+    }
+
+    .discord-logo {
+      width: 40px;
+      height: auto;
+      cursor: pointer;
+    }
+
+    .overlay h2 {
+      color: #ff4654; /* Valorant red for headings */
+    }
+
+    .overlay button {
+      margin: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: #ff4654; /* Valorant red for buttons */
+      border: none;
+      border-radius: 5px;
+      color: #fff; /* Button text color */
+      font-weight: bold;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .overlay button:hover {
+      background-color: #ff3c47; /* Darker shade of Valorant red on hover */
+    }
+
+    /* Valorant game-like UI */
+    .skin-name {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .skin-image {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Popup styling */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+      backdrop-filter: blur(5px); /* Apply a slight blur to the background */
+      justify-content: center;
+      align-items: center;
+      z-index: 2; /* Place it above other content */
+    }
+
+    .popup-content {
+      background-color: #1e1e1e; /* Dark theme background color */
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      color: #fff; /* Text color */
+    }
+
+    #close-popup {
+      background-color: #ff4654; /* Valorant red for the button */
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      color: #fff; /* Button text color */
+      font-weight: bold;
+      transition: background-color 0.3s ease-in-out;
+      margin-top: 10px;
+    }
+
+    #close-popup:hover {
+      background-color: #ff3c47; /* Darker shade of Valorant red on hover */
+    }
+
+    /* Updated custom notification styling */
+.notification {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #ff4654; /* Valorant red for background */
+  color: #fff; /* White text color */
+  padding: 15px 25px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(-20px); /* Start with a slight upward translation */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  z-index: 9999; /* Set a high z-index value to ensure it's on top of everything */
+}
+
+.notification.show {
+  opacity: 1;
+  transform: translateY(0); /* Apply a downward translation for a smooth appearance */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+  </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Valorant+Font">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Valorant Skins</h1>
+    <div class="search-bar">
+      <input class="search-input" type="text" placeholder="Search skin...">
+    </div>
+    <div id="skins-container"></div>
+  </div>
+
+  <div class="credit">
+    <p>Created by Mox</p>
+  </div>
+
+  <!-- Discord logo link -->
+  <a href="https://discord.gg/V8Cd3UmfMy" target="_blank" rel="noopener noreferrer" class="discord-link">
+    <img src="https://cdn.discordapp.com/attachments/1146303772730073191/1147438575743410196/23-236211_REDD.png"
+      alt="Discord" class="discord-logo">
+  </a>
+
+  <!-- Overlay for skin equip confirmation -->
+  <div id="overlay" class="overlay">
+    <div class="overlay-content">
+      <h2 class="skin-name">Equip Skin</h2>
+      <img class="skin-image" src="" alt="Selected Skin">
+      <p>Do you want to equip this skin in your loadout?</p>
+      <button id="confirm-equip">Yes</button>
+      <button id="cancel-equip">No</button>
+    </div>
+  </div>
+
+  <!-- Popup for Valorant launched message -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <p>In order to use this website, you need to have Valorant launched.</p>
+      <button id="close-popup">Close</button>
+    </div>
+  </div>
+
+  <!-- Custom notification -->
+  <div id="notification" class="notification"></div>
+
+  <script>
+    const skinsContainer = document.getElementById('skins-container');
+    const searchInput = document.querySelector('.search-input');
+    const overlay = document.getElementById('overlay');
+    const overlayContent = overlay.querySelector('.overlay-content');
+    const popup = document.getElementById('popup');
+    const closePopupButton = document.getElementById('close-popup');
+    const notification = document.getElementById('notification');
+
+    // Show the Valorant launched popup
+    popup.style.display = 'flex';
+
+    // Close the popup and the website when the "Close" button is clicked
+    closePopupButton.addEventListener('click', function () {
+      popup.style.display = 'none';
+      window.close(); // Close the website
+    });
+
+    // Fetch data from the API and implement search functionality
+    fetch('https://valorant-api.com/v1/weapons/skins')
+      .then(response => response.json())
+      .then(data => {
+        // Fetch tier price data
+        fetch('https://valorant-api.com/v1/contenttiers')
+          .then(response => response.json())
+          .then(tierData => {
+            const tierPrices = {};
+            tierData.data.forEach(tier => {
+              tierPrices[tier.uuid] = tier;
+            });
+
+            // Function to update the displayed skins based on search
+            const updateSkins = () => {
+              const searchTerm = searchInput.value.trim().toLowerCase();
+              skinsContainer.innerHTML = '';
+
+              data.data.forEach(skin => {
+                const tierInfo = tierPrices[skin.contentTierUuid];
+                if (tierInfo && skin.displayName.toLowerCase().includes(searchTerm)) {
+                  const skinCard = document.createElement('div');
+                  skinCard.className = 'skin-card';
+                  skinCard.innerHTML = `
+                                        <h2>${skin.displayName}</h2>
+                                        <p>Edition: ${tierInfo.displayName}</p>
+                                        <p>Level: ${tierInfo.abbreviation}</p>
+                                        <p>Asset Path: ${skin.assetPath}</p>
+                                        <img src="${skin.displayIcon}" alt="${skin.displayName}">
+                                    `;
+                  skinsContainer.appendChild(skinCard);
+
+                  // Add a click event listener to each skin card
+                  skinCard.addEventListener('click', () => openOverlay(skin));
+                }
+              });
+            };
+
+            // Call the updateSkins function on input
+            searchInput.addEventListener('input', updateSkins);
+
+            // Call the updateSkins function when Enter key is pressed
+            searchInput.addEventListener('keydown', event => {
+              if (event.key === 'Enter') {
+                updateSkins();
+              }
+            });
+
+            // Initial call to populate skins on page load
+            updateSkins();
+          })
+          .catch(error => {
+            console.error('Error fetching tier data:', error);
+          });
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+
+    document.getElementById('confirm-equip').addEventListener('click', () => {
+      // Add code to handle equipping the skin (e.g., send a request to the server)
+
+      // Display the notification
+      showNotification('Skin successfully equipped!');
+    });
+
+    document.getElementById('cancel-equip').addEventListener('click', () => {
+      closeOverlay();
+    });
+
+    function openOverlay(skin) {
+      overlayContent.querySelector('.skin-name').textContent = `Equip "${skin.displayName}"`;
+      overlayContent.querySelector('.skin-image').src = skin.displayIcon;
+      overlay.style.display = 'block';
+    }
+
+    function closeOverlay() {
+      overlay.style.display = 'none';
+    }
+
+    // Function to show the notification
+    function showNotification(message) {
+      notification.textContent = message;
+      notification.classList.add('show');
+
+      // Hide the notification after a few seconds (e.g., 3 seconds)
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000); // 3000 milliseconds (3 seconds)
+    }
+  </script>
+</body>
+
+</html>
